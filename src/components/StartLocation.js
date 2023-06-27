@@ -1,15 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import LocationItem from "./LocationItem";
+import StartContext from "../store/start-context";
 
 const StartLocation = (props) => {
+    const startCtx = useContext(StartContext);
+    
     return(
         <div>
             <LocationItem 
-                id={props.data.id}
-                latitude={props.data.latitude} 
-                longitude={props.data.longitude} 
-                name={props.data.name} 
-                onChange={props.onChange}
+                id={startCtx.id}
+                latitude={startCtx.latitude} 
+                longitude={startCtx.longitude} 
+                name={startCtx.name} 
+                onChange={startCtx.update}
             />
         </div>
     )

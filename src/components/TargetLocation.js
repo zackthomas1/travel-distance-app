@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import LocationItem from "./LocationItem";
-
+import TargetsContext from "../store/target-context";
 const TargetLocation = (props) => {
-    
+    const targetsCtx = useContext(TargetsContext);
+
     const removeTargetHandler = () => {
-        props.onRemove(props.data.id);
+        targetsCtx.remove(props.data.id);
     }
 
     return(
@@ -14,7 +15,7 @@ const TargetLocation = (props) => {
                 latitude={props.data.latitude} 
                 longitude={props.data.longitude} 
                 name={props.data.name} 
-                onChange={props.onChange}
+                onChange={targetsCtx.update}
             />
             <button onClick={removeTargetHandler}>Remove Target</button>
         </div>

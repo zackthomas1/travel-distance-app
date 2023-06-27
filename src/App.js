@@ -2,6 +2,7 @@ import React from 'react'
 
 import LocationsForm from './components/LocationsForm';
 import Results from './components/Results';
+import LocationsProvider from './store/LocationsProvider';
 
 function App() {
   return (
@@ -9,7 +10,10 @@ function App() {
       <h1>Travel Distance Calculator</h1>
 
       <div>
-        <LocationsForm/>
+        <LocationsProvider>
+          <LocationsForm/>
+        </LocationsProvider>
+
       </div>
 
       <div>
