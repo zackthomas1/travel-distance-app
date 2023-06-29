@@ -5,8 +5,8 @@ import TargetsContext from "./target-context";
 const initalTargetsState = {
     count:1,
     targets: {
-        t0000000: {
-            id: 't0000000',
+        t000000: {
+            id: 't000000',
             latitude: '',
             longitude: '', 
             name: '',
@@ -55,8 +55,8 @@ const TargetsReducer = (state, action) => {
         return {
             count:1,
             targets: {
-                t0000000: {
-                    id: 't0000000',
+                t000000: {
+                    id: 't000000',
                     latitude: '',
                     longitude: '', 
                     name: '',

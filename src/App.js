@@ -7,11 +7,11 @@ import LocationsProvider from './store/LocationsProvider';
 function App() {
   const [results, setResults] = useState({
     closest: {
-      id: 't0000000',
+      id: 't000000',
       distance: 0,
     },
     furthest: {
-      id: 't0000000',
+      id: 't000000',
       distance: 0,
     },
   });
