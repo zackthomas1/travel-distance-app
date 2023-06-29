@@ -1,7 +1,7 @@
 import React from "react";
 
 const LocationItem = (props) => {
-    
+
     // Handlers
     const changeLatitudeHandler = (event) => {
         props.onChange(props.id, {
@@ -39,6 +39,7 @@ const LocationItem = (props) => {
                 id={`latitude_${props.id}`} 
                 onChange={changeLatitudeHandler} 
                 value={props.latitude} 
+                placeholder="ex. 33.9425/N"
             />
             
             <label htmlFor={`longitude_${props.id}`}>Longitude</label>
@@ -48,6 +49,7 @@ const LocationItem = (props) => {
                 id={`longitude_${props.id}`}
                 onChange={changeLongitudeHandler} 
                 value={props.longitude} 
+                placeholder="ex. 118.4081/W"
             />
 
             <label htmlFor={`location_${props.id}`}>Location Name</label>
@@ -57,6 +59,7 @@ const LocationItem = (props) => {
                 id={`location_${props.id}`}
                 onChange={changeNameHandler} 
                 value={props.name} 
+                placeholder="ex. Los Angeles"
             />            
         </React.Fragment>
     ); 

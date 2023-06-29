@@ -1,22 +1,32 @@
-import React, { useState } from "react"
-
-const latitude = 0; 
-const longitude = 0; 
-const location = 0; 
-const distance = 0; 
+import React, { useContext } from "react"
+import StartContext from "../store/start-context";
+import TargetsContext from "../store/target-context";
 
 const Results = (props) => {
-    const [isDisplayed, setIsDisplayed] = useState(false)
+    //
+    const startCtx = useContext(StartContext); 
+    const targetsCtx = useContext(TargetsContext); 
 
-    const contentElements = (<React.Fragment>
-            <section>{`Start Location: ${latitude} ${longitude} (${location})`}</section>
-            <section>{`Closet Location: ${latitude} ${longitude} (${location}) (${distance})`}</section>
-            <section>{`Farthest Location: ${latitude} ${longitude} (${location}) (${distance})`}</section>
-        </React.Fragment>)
+    const {id: closetId, distance: closestDistance} = props.results.closest;
+    const {id: furthestId, distance: furthestDistance} = props.results.furthest;
+
+    const contentElements = <React.Fragment>
+            <h2>Results:</h2>
+
+            <section>
+                {`Start Location: ${startCtx.data.latitude} ${startCtx.data.longitude} (${startCtx.data.name})`}
+            </section>
+            <section>
+                {`Closet Location: ${targetsCtx.targets[closetId].latitude} ${targetsCtx.targets[closetId].longitude} (${targetsCtx.targets[closetId].name}) (${closestDistance.toFixed(2)} miles)`}
+            </section>
+            <section>
+                {`Farthest Location: ${targetsCtx.targets[furthestId].latitude} ${targetsCtx.targets[furthestId].longitude} (${targetsCtx.targets[furthestId].name}) (${furthestDistance.toFixed(2)} miles)`}
+            </section>
+        </React.Fragment>
 
     return (
         <div>
-            {isDisplayed && contentElements}
+            {props.isDisplayed && contentElements}
         </div>
     )
 }

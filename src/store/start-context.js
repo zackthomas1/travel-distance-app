@@ -1,11 +1,13 @@
 import { createContext } from "react";
 
 const StartContext = createContext({
-    id: `s0000000`,
-    latitude: '',
-    longitude: '', 
-    name: '',
-    update: (ID, updatedProps) => {},
+    data: {
+        id: `s0000000`,
+        latitude: '',
+        longitude: '', 
+        name: '',
+    },
+    update: (id, updatedData) => {},
     reset: () => {}
 }); 
 

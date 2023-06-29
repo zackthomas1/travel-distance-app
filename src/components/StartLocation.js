@@ -8,10 +8,10 @@ const StartLocation = (props) => {
     return(
         <div>
             <LocationItem 
-                id={startCtx.id}
-                latitude={startCtx.latitude} 
-                longitude={startCtx.longitude} 
-                name={startCtx.name} 
+                id={startCtx.data.id}
+                latitude={startCtx.data.latitude} 
+                longitude={startCtx.data.longitude} 
+                name={startCtx.data.name} 
                 onChange={startCtx.update}
             />
         </div>
