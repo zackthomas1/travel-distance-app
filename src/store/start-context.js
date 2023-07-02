@@ -7,8 +7,16 @@ const StartContext = createContext({
         longitude: '', 
         name: '',
     },
-    update: (id, updatedData) => {},
-    reset: () => {}
+    inputStates:{
+        latInputHasError: false,
+        longInputHasError: false,
+        nameInputHasError: false, 
+
+        isLatInputTouched: false, 
+        isLongInputTouched: false, 
+        isNameInputTouched: false, 
+    },
+    action: (action) => {}
 }); 
 
 export default StartContext;

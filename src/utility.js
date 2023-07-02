@@ -30,7 +30,7 @@ export const parseLatLong = (latStr, longStr) => {
     const pattern = /^\d+(\.\d+)?\/[A-Z]$/
     const regex = new RegExp(pattern);
 
-    // ex. '-188.35
+    // ex. '-188.35'
     const pattern2 = /^-?\d+(\.\d+)?$/;
     const regex2 = new RegExp(pattern2);
 

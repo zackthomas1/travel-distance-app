@@ -16,7 +16,7 @@ const LocationsForm = (props) => {
 
     // Handlers
     const resetFormHandler = () => {
-        startCtx.reset();
+        startCtx.action({type:'RESET'});
         targetsCtx.reset();
         props.onSetResultDisplay(false);
     }
@@ -59,12 +59,12 @@ const LocationsForm = (props) => {
     return(
         <React.Fragment>
             <form onSubmit={submitHandler}>
-                <div>
+                <div className="">
                     <h2>Starting Location:</h2>
                     <StartLocation />
                 </div>
 
-                <div>
+                {/* <div className="">
                     <h2>Target Locations:</h2>
                     {Object.values(targetsCtx.targets).map((target) => {
                         return(
@@ -73,10 +73,10 @@ const LocationsForm = (props) => {
                                 data={target} 
                             />)
                     })}
-                    <button type="button" onClick={targetsCtx.add}>Add New Destination</button>
-                </div>
+                </div> */}
 
-                <div>
+                <div className="form-actions">
+                    <button type="button" onClick={targetsCtx.add}>Add New Destination</button>
                     <button type="button" onClick={resetFormHandler}>Reset Form</button>
                     <button type="submit">Submit Form</button>
                 </div>

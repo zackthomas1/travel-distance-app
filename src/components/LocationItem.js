@@ -1,60 +1,57 @@
-import React, { useState } from "react";
+import React from "react";
 
 const LocationItem = (props) => {
 
     // Handlers
-    const blurLatitudeHandler = (event) => {
-        props.onSetLatInputTouched(true); 
-        const isLatInputValid = props.validateLatValueFN(event.target.value);
-        props.onSetLatInputHasError(!isLatInputValid);
+    const blurLatHandler = () => {
+        props.onAction({
+            id: props.id, 
+            type: 'BLUR', 
+            field: 'LAT',
+        })
     }
 
-    const changeLatitudeHandler = (event) => {
-        const isLatInputValid = props.validateLatValueFN(event.target.value);
-        props.onSetLatInputHasError(!isLatInputValid && props.isLatInputTouched);
-
-        props.onChange(props.id, {
-            id: props.id,
-            latitude: event.target.value,
-            longitude: props.longitude,
-            name: props.name,
-        });
+    const changeLatHandler = (event) => {
+        props.onAction({
+            id: props.id, 
+            type: 'INPUT', 
+            field : 'LAT',
+            updatedValue: event.target.value,}
+        )
     }
 
-    const blurLongitudeHandler = (event) => {
-        props.onSetLongInputTouched(true); 
-        const isLongInputValid = props.validateLongValueFN(event.target.value);
-        props.onSetLongInputHasError(!isLongInputValid);
+    const blurLongHandler = () => {
+        props.onAction({
+            id: props.id, 
+            type: 'BLUR', 
+            field: 'LONG',
+        })
     }
 
-    const changeLongitudeHandler = (event) => {
-        const isLongInputValid = props.validateLongValueFN(event.target.value);
-        props.onSetLongInputHasError(!isLongInputValid && props.isLongInputTouched);
-
-        props.onChange(props.id, {
-            id: props.id,
-            latitude: props.latitude,
-            longitude: event.target.value,
-            name: props.name,
-        });
+    const changeLongHandler = (event) => {
+        props.onAction({
+            id: props.id, 
+            type: 'INPUT', 
+            field : 'LONG',
+            updatedValue: event.target.value,}
+        )
     }
 
-    const blurNameHandler = (event) => {
-        props.onSetNameInputTouched(true); 
-        const isNameInputValid = props.validateNameValueFN(event.target.value);
-        props.onSetNameInputHasError(!isNameInputValid);
+    const blurNameHandler = () => {
+        props.onAction({
+            id: props.id, 
+            type: 'BLUR', 
+            field: 'NAME',
+        })
     }
 
-    const changeNameHandler = (event) => {
-        const isNameInputValid = props.validateNameValueFN(event.target.value);
-        props.onSetNameInputHasError(!isNameInputValid && props.isNameInputTouched);
-
-        props.onChange(props.id, {
-            id: props.id,
-            latitude: props.latitude,
-            longitude: props.longitude,
-            name: event.target.value,
-        });
+    const changeNameHandler = (event) => {  
+        props.onAction({
+            id: props.id, 
+            type: 'INPUT', 
+            field : 'NAME',
+            updatedValue: event.target.value,}
+        )
     }
       
     return(
@@ -65,12 +62,12 @@ const LocationItem = (props) => {
                     type="text" 
                     name={`latitude_${props.id}`} 
                     id={`latitude_${props.id}`} 
-                    onChange={changeLatitudeHandler}
-                    onBlur={blurLatitudeHandler}
+                    onChange={changeLatHandler}
+                    onBlur={blurLatHandler}
                     value={props.latitude} 
                     placeholder="ex. 33.9425/N"
                 />
-                {props.latInputHasError && <p className="error-text">Latitude Input Invalid</p>}
+                {props.inputStates.latInputHasError && <p className="error-text">Latitude Input Invalid</p>}
             </div>
 
             <div className='form-control'>
@@ -79,12 +76,12 @@ const LocationItem = (props) => {
                     type="text" 
                     name={`longitude_${props.id}`} 
                     id={`longitude_${props.id}`}
-                    onChange={changeLongitudeHandler} 
-                    onBlur={blurLongitudeHandler}
+                    onChange={changeLongHandler} 
+                    onBlur={blurLongHandler}
                     value={props.longitude} 
                     placeholder="ex. 118.4081/W"
                 />
-                {props.longInputHasError && <p className="error-text">Longitude Input Invalid</p>}
+                {props.inputStates.longInputHasError && <p className="error-text">Longitude Input Invalid</p>}
             </div>
 
             <div className='form-control'>
@@ -98,7 +95,7 @@ const LocationItem = (props) => {
                     value={props.name} 
                     placeholder="ex. Los Angeles"
                 />      
-                {props.nameInputHasError && <p className="error-text">Location Input Invalid</p>}
+                {props.inputStates.nameInputHasError && <p className="error-text">Location Input Invalid</p>}
             </div>
         </div>
     ); 
