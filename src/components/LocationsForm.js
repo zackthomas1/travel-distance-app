@@ -21,8 +21,18 @@ const LocationsForm = (props) => {
         props.onSetResultDisplay(false);
     }
 
+    // Set form validity
+    let formIsValid = false; 
+    if(true){   // TO-DO: complete validity test
+        formIsValid = true;
+    }
+
     const submitHandler = (event) =>{
         event.preventDefault();
+
+        if(!formIsValid){
+            return;
+        }
 
         let targetDistances = [];
 

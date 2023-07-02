@@ -27,7 +27,10 @@ const StartProvider = (props) => {
     const startContext = {
         ...startLocation, 
         update: updateHandler,
-        reset: resetHandler
+        reset: resetHandler, 
+        inputValidation: {
+
+        },
     }
     return(
         <StartContext.Provider value={startContext}>
@@ -37,3 +40,4 @@ const StartProvider = (props) => {
 }
 
 export default StartProvider;
+
