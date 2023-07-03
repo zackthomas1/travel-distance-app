@@ -1,5 +1,5 @@
 import React, { useReducer } from "react";
-
+import { validateLatitudeValue, validateLongitudeValue, validateNameValue } from "../utility";
 import StartContext from "./start-context"
 
 const initialStartState = {
@@ -121,42 +121,3 @@ const StartStateReducer = (state, action) => {
     }
 }
 
-const validateLatitudeValue = (input) => {
-    // ex. '188.35/S'
-    const pattern = /^\d+(\.\d+)?\/[A-Z]$/
-    const regex = new RegExp(pattern);
-
-    // ex. '-188.35
-    const pattern2 = /^-?\d+(\.\d+)?$/;
-    const regex2 = new RegExp(pattern2);
-
-    input = input.trim();
-
-    if(regex.test(input) || regex2.test(input)){
-        return true; 
-    }else{
-        return false;
-    }
-}
-
-const validateLongitudeValue = (input) => {
-    // ex. '188.35/S'
-    const pattern = /^\d+(\.\d+)?\/[A-Z]$/
-    const regex = new RegExp(pattern);
-
-    // ex. '-188.35
-    const pattern2 = /^-?\d+(\.\d+)?$/;
-    const regex2 = new RegExp(pattern2);
-
-    input = input.trim();
-
-    if(regex.test(input) || regex2.test(input)){
-        return true; 
-    }else{
-        return false;
-    }
-}
-
-const validateNameValue = (input) => {
-    return input.length > 0;
-}

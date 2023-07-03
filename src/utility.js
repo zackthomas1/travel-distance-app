@@ -69,3 +69,43 @@ export const parseLatLong = (latStr, longStr) => {
 
     return [latValue, longValue];
 }
+
+export const validateLatitudeValue = (input) => {
+    // ex. '188.35/S'
+    const pattern = /^\d+(\.\d+)?\/[A-Z]$/
+    const regex = new RegExp(pattern);
+
+    // ex. '-188.35
+    const pattern2 = /^-?\d+(\.\d+)?$/;
+    const regex2 = new RegExp(pattern2);
+
+    input = input.trim();
+
+    if(regex.test(input) || regex2.test(input)){
+        return true; 
+    }else{
+        return false;
+    }
+}
+
+export const validateLongitudeValue = (input) => {
+    // ex. '188.35/S'
+    const pattern = /^\d+(\.\d+)?\/[A-Z]$/
+    const regex = new RegExp(pattern);
+
+    // ex. '-188.35
+    const pattern2 = /^-?\d+(\.\d+)?$/;
+    const regex2 = new RegExp(pattern2);
+
+    input = input.trim();
+
+    if(regex.test(input) || regex2.test(input)){
+        return true; 
+    }else{
+        return false;
+    }
+}
+
+export const validateNameValue = (input) => {
+    return input.length > 0;
+}

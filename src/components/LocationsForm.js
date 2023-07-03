@@ -64,16 +64,16 @@ const LocationsForm = (props) => {
                     <StartLocation />
                 </div>
 
-                {/* <div className="">
+                <div className="">
                     <h2>Target Locations:</h2>
                     {Object.values(targetsCtx.targets).map((target) => {
                         return(
                             <TargetLocation
-                                key={target.id} 
-                                data={target} 
+                                key={target.data.id} 
+                                target={target} 
                             />)
                     })}
-                </div> */}
+                </div>
 
                 <div className="form-actions">
                     <button type="button" onClick={targetsCtx.add}>Add New Destination</button>
