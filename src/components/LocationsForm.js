@@ -17,10 +17,8 @@ const LocationsForm = (props) => {
     }
 
     // Set form validity
-    let formIsValid = false; 
-    if(true){   // TO-DO: complete validity test
-        formIsValid = true;
-    }
+    let formIsValid = !(Object.values(locationsCtx.starts).some((start) => !start.isInputValid ));
+    formIsValid = !(Object.values(locationsCtx.targets).some((target) => !target.isInputValid))
 
     const submitHandler = (event) =>{
         event.preventDefault();
@@ -83,7 +81,7 @@ const LocationsForm = (props) => {
                 <div className="form-actions">
                     <button type="button" onClick={locationsCtx.addTarget}>Add New Destination</button>
                     <button type="button" onClick={resetFormHandler}>Reset Form</button>
-                    <button type="submit">Submit Form</button>
+                    <button type="submit" disabled={!formIsValid}>Submit Form</button>
                 </div>
             </form>
         </React.Fragment>

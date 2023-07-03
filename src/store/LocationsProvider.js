@@ -18,7 +18,7 @@ const initialLocationsState = {
             isLongInputTouched: false, 
             isNameInputTouched: false, 
 
-            isValid: false,
+            isInputValid: false,
         },
     },
     targets: {
@@ -36,7 +36,7 @@ const initialLocationsState = {
             isLongInputTouched: false, 
             isNameInputTouched: false, 
 
-            isValid: false,
+            isInputValid: false,
         },
     }
 }
@@ -84,7 +84,7 @@ const locationsStateReducer = (state, action) => {
             isLongInputTouched: false, 
             isNameInputTouched: false, 
 
-            isValid: false,
+            isInputValid: false,
         }
         const updatedState = {...state}; 
         updatedState.targets[newTargetKey] = newTargetValue;
@@ -137,6 +137,13 @@ const locationsStateReducer = (state, action) => {
                 const updatedState = {...state}; 
                 updatedState[locationType][action.payload.id].latInputHasError = !isLatInputValid;
                 updatedState[locationType][action.payload.id].isLatInputTouched = true;
+
+                if(isLatInputValid && 
+                    !updatedState[locationType][action.payload.id].longInputHasError && 
+                    !updatedState[locationType][action.payload.id].nameInputHasError) 
+                {
+                    updatedState[locationType][action.payload.id].isInputValid = true
+                }
     
                 return updatedState;
             }else if(action.payload.field === 'LONG'){
@@ -145,7 +152,14 @@ const locationsStateReducer = (state, action) => {
                 const updatedState = {...state}; 
                 updatedState[locationType][action.payload.id].longInputHasError = !isLongInputValid;
                 updatedState[locationType][action.payload.id].isLongInputTouched = true;
-    
+
+                if(isLongInputValid && 
+                    !updatedState[locationType][action.payload.id].latInputHasError && 
+                    !updatedState[locationType][action.payload.id].nameInputHasError) 
+                {
+                    updatedState[locationType][action.payload.id].isInputValid = true
+                }
+
                 return updatedState;
             }else if(action.payload.field === 'NAME'){
                 const isNameInputValid = validateNameValue(state[locationType][action.payload.id].name);
@@ -153,7 +167,14 @@ const locationsStateReducer = (state, action) => {
                 const updatedState = {...state}; 
                 updatedState[locationType][action.payload.id].nameInputHasError = !isNameInputValid;
                 updatedState[locationType][action.payload.id].isNameInputTouched = true;
-    
+
+                if(isNameInputValid && 
+                    !updatedState[locationType][action.payload.id].latInputHasError && 
+                    !updatedState[locationType][action.payload.id].longInputHasError) 
+                {
+                    updatedState[locationType][action.payload.id].isInputValid = true
+                }
+
                 return updatedState;
             }
         }
@@ -174,7 +195,7 @@ const locationsStateReducer = (state, action) => {
                     isLongInputTouched: false, 
                     isNameInputTouched: false, 
         
-                    isValid: false,
+                    isInputValid: false,
                 },
             },
             targets: {
@@ -192,7 +213,7 @@ const locationsStateReducer = (state, action) => {
                     isLongInputTouched: false, 
                     isNameInputTouched: false, 
         
-                    isValid: false,
+                    isInputValid: false,
                 },
             }
         }

@@ -16,7 +16,7 @@ const LocationsContext = createContext({
             isLongInputTouched: false, 
             isNameInputTouched: false, 
 
-            isValid: false,
+            isInputValid: false,
         },
     },
     targets: {
@@ -34,7 +34,7 @@ const LocationsContext = createContext({
             isLongInputTouched: false, 
             isNameInputTouched: false, 
 
-            isValid: false,
+            isInputValid: false,
         },
     },
     addTarget: () => {}, 
