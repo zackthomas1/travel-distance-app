@@ -20,4 +20,3 @@ const StartLocation = (props) => {
 }
 
 export default StartLocation;
-

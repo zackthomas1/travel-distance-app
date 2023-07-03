@@ -40,7 +40,7 @@ const LocationsForm = (props) => {
         Object.values(targetsCtx.targets).forEach((target)=>{
             let d = Haversine(
                 {lat: startCtx.data.latitude, long: startCtx.data.longitude}, 
-                {lat:target.latitude, long: target.longitude}
+                {lat: target.latitude, long: target.longitude}
             );
                 
             targetDistances.push({id: target.id, distance: d})

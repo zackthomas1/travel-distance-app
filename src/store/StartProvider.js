@@ -48,132 +48,75 @@ const StartStateReducer = (state, action) => {
             const isLatInputValid = validateLatitudeValue(action.updatedValue);
             const hasError = (!isLatInputValid && state.inputStates.isLatInputTouched);
 
-            return{
-                data: {
-                    id: state.data.id,
-                    latitude: action.updatedValue,
-                    longitude: state.data.longitude, 
-                    name: state.data.name,
-                },
-                inputStates:{
-                    latInputHasError:  hasError,
-                    longInputHasError: state.inputStates.longInputHasError,
-                    nameInputHasError: state.inputStates.nameInputHasError,
-            
-                    isLatInputTouched: state.inputStates.isLatInputTouched, 
-                    isLongInputTouched: state.inputStates.isLatInputTouched, 
-                    isNameInputTouched: state.inputStates.isLatInputTouched, 
-                },
-            }
-        }else if(action.field === 'LONG'){
+            const updatedState = {...state}; 
+            updatedState.data.latitude = action.updatedValue;
+            updatedState.inputStates.latInputHasError = hasError;
+
+            return updatedState;
+         }else if(action.field === 'LONG'){
             const isLongInputValid = validateLongitudeValue(action.updatedValue);
             const hasError = (!isLongInputValid && state.inputStates.isLongInputTouched)
 
-            return{
-                data: {
-                    id: state.data.id,
-                    latitude: state.data.latitude,
-                    longitude: action.updatedValue, 
-                    name: state.data.name,
-                },
-                inputStates:{
-                    latInputHasError: state.inputStates.latInputHasError,
-                    longInputHasError: hasError,
-                    nameInputHasError: state.inputStates.nameInputHasError, 
-            
-                    isLatInputTouched: state.inputStates.isLatInputTouched, 
-                    isLongInputTouched: state.inputStates.isLatInputTouched, 
-                    isNameInputTouched: state.inputStates.isLatInputTouched, 
-                },
-            }
+            const updatedState = {...state}; 
+            updatedState.data.longitude = action.updatedValue;
+            updatedState.inputStates.longInputHasError = hasError;
+
+            return updatedState;
         }else if(action.field === 'NAME'){
             const isNameInputValid = validateNameValue(action.updatedValue);
             const hasError = (!isNameInputValid && state.inputStates.isNameInputTouched)
             
-            return{
-                data: {
-                    id: state.data.id,
-                    latitude: state.data.latitude,
-                    longitude: state.data.longitude, 
-                    name: action.updatedValue,
-                },    
-                inputStates:{
-                    latInputHasError: state.inputStates.latInputHasError,
-                    longInputHasError: state.inputStates.longInputHasError,
-                    nameInputHasError: hasError, 
-            
-                    isLatInputTouched: state.inputStates.isLatInputTouched, 
-                    isLongInputTouched: state.inputStates.isLatInputTouched, 
-                    isNameInputTouched: state.inputStates.isLatInputTouched, 
-                },
-            }
+            const updatedState = {...state}; 
+            updatedState.data.name = action.updatedValue;
+            updatedState.inputStates.nameInputHasError = hasError;
+
+            return updatedState;
         }
     }else if(action.type === 'BLUR'){
         if(action.field === 'LAT'){
             const isLatInputValid = validateLatitudeValue(state.data.latitude);
 
-            return{
-                data: {
-                    id: state.data.id,
-                    latitude: state.data.latitude,
-                    longitude: state.data.longitude, 
-                    name: action.updatedValue,
-                },    
-                inputStates:{
-                    latInputHasError: !isLatInputValid,
-                    longInputHasError: state.inputStates.longInputHasError,
-                    nameInputHasError: state.inputStates.nameInputHasError, 
+            const updatedState = {...state}; 
+            updatedState.inputStates.latInputHasError = !isLatInputValid;
+            updatedState.inputStates.isLatInputTouched = true;
+
+            return updatedState;
             
-                    isLatInputTouched: true, 
-                    isLongInputTouched: state.inputStates.isLongInputTouched,  
-                    isNameInputTouched: state.inputStates.isNameInputTouched, 
-                },
-            }
         }else if(action.field === 'LONG'){
             const isLongInputValid = validateLongitudeValue(state.data.longitude);
 
-            return{
-                data: {
-                    id: state.data.id,
-                    latitude: state.data.latitude,
-                    longitude: state.data.longitude, 
-                    name: action.updatedValue,
-                },    
-                inputStates:{
-                    latInputHasError: state.inputStates.latInputHasError,
-                    longInputHasError: !isLongInputValid,
-                    nameInputHasError: state.inputStates.nameInputHasError, 
-            
-                    isLatInputTouched: state.inputStates.isLatInputTouched, 
-                    isLongInputTouched: true, 
-                    isNameInputTouched: state.inputStates.isLatInputTouched, 
-                },
-            }
+            const updatedState = {...state}; 
+            updatedState.inputStates.longInputHasError = !isLongInputValid;
+            updatedState.inputStates.isLongInputTouched = true;
+
+            return updatedState;
+
         }else if(action.field === 'NAME'){
             const isNameInputValid = validateNameValue(state.data.name);
 
-            return{
-                data: {
-                    id: state.data.id,
-                    latitude: state.data.latitude,
-                    longitude: state.data.longitude, 
-                    name: action.updatedValue,
-                },    
-                inputStates:{
-                    latInputHasError: state.inputStates.latInputHasError,
-                    longInputHasError: state.inputStates.longInputHasError,
-                    nameInputHasError: !isNameInputValid, 
-            
-                    isLatInputTouched: state.inputStates.isLatInputTouched, 
-                    isLongInputTouched: state.inputStates.isLongInputTouched,
-                    isNameInputTouched: true, 
-                },
-            }
+            const updatedState = {...state}; 
+            updatedState.inputStates.nameInputHasError = !isNameInputValid;
+            updatedState.inputStates.isNameInputTouched = true;
+
+            return updatedState;
         }
-    }
-    else if(action.type === 'RESET'){
+    }else if(action.type === 'RESET'){
         return {
-            ...initialStartState
+            data: {
+                id: `s0000000`,
+                latitude: '',
+                longitude: '', 
+                name: '',
+            },    
+            inputStates:{
+                latInputHasError: false,
+                longInputHasError: false,
+                nameInputHasError: false, 
+        
+                isLatInputTouched: false, 
+                isLongInputTouched: false, 
+                isNameInputTouched: false, 
+            },
         }
     }
 }
