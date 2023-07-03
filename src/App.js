@@ -5,16 +5,7 @@ import Results from './components/Results';
 import LocationsProvider from './store/LocationsProvider';
 
 function App() {
-  const [results, setResults] = useState({
-    closest: {
-      id: 't000000',
-      distance: 0,
-    },
-    furthest: {
-      id: 't000000',
-      distance: 0,
-    },
-  });
+  const [results, setResults] = useState([]);
   const [isResultDisplayed, setIsResultDisplayed] = useState(false);
 
   return (

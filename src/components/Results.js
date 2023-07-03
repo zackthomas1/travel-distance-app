@@ -1,32 +1,35 @@
 import React, { useContext } from "react"
-import StartContext from "../store/start-context";
-import TargetsContext from "../store/target-context";
+import LocationsContext from "../store/locations-context";
+
 
 const Results = (props) => {
     //
-    const startCtx = useContext(StartContext); 
-    const targetsCtx = useContext(TargetsContext); 
+    const locationsCtx = useContext(LocationsContext);
+    const isResultsEmpty = !(props.results.length > 0);
 
-    const {id: closetId, distance: closestDistance} = props.results.closest;
-    const {id: furthestId, distance: furthestDistance} = props.results.furthest;
-
-    const contentElements = <React.Fragment>
-            <h2>Results:</h2>
-
-            <section>
-                {`Start Location: ${startCtx.data.latitude} ${startCtx.data.longitude} (${startCtx.data.name})`}
-            </section>
-            <section>
-                {`Closet Location: ${targetsCtx.targets[closetId].latitude} ${targetsCtx.targets[closetId].longitude} (${targetsCtx.targets[closetId].name}) (${closestDistance.toFixed(2)} miles)`}
-            </section>
-            <section>
-                {`Farthest Location: ${targetsCtx.targets[furthestId].latitude} ${targetsCtx.targets[furthestId].longitude} (${targetsCtx.targets[furthestId].name}) (${furthestDistance.toFixed(2)} miles)`}
-            </section>
-        </React.Fragment>
+    const content_element = props.results.map((result) => {
+        const { startId:closestStartId, targetId: closestTargetId, distance: closestDistance } = result.closest;
+        const { startId: furthestStartId, targetId: furthestTargetId, distance: furthestDistance } = result.furthest;
+    
+        return(
+            <div>
+                <section>
+                    {`Start Location: ${locationsCtx.starts[closestStartId].latitude} ${locationsCtx.starts[closestStartId].longitude} (${locationsCtx.starts[closestStartId].name})`}
+                </section>
+                <section>
+                    {`Closet Location: ${locationsCtx.targets[closestTargetId].latitude} ${locationsCtx.targets[closestTargetId].longitude} (${locationsCtx.targets[closestTargetId].name}) (${closestDistance.toFixed(2)} miles)`}
+                </section>
+                <section>
+                    {`Farthest Location: ${locationsCtx.targets[furthestTargetId].latitude} ${locationsCtx.targets[furthestTargetId].longitude} (${locationsCtx.targets[furthestTargetId].name}) (${furthestDistance.toFixed(2)} miles)`}
+                </section>                
+            </div>
+        );
+    }); 
 
     return (
         <div>
-            {props.isDisplayed && contentElements}
+            <h2>Results:</h2>
+            {!isResultsEmpty && content_element}
         </div>
     )
 }

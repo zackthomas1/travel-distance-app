@@ -1,24 +1,21 @@
 import React, { useContext } from "react";
-import LocationItem from "./LocationItem";
-import TargetsContext from "../store/target-context";
-const TargetLocation = (props) => {
-    const targetsCtx = useContext(TargetsContext);
+import Location from "./Location";
+import LocationsContext from "../store/locations-context";
 
-    const id = (props.target.data.id)
+const TargetLocation = (props) => {
+    const locationsCtx = useContext(LocationsContext);
+
 
     const removeTargetHandler = () => {
-        targetsCtx.remove(id);
+        locationsCtx.removeTarget(props.id);
     }
 
     return(
         <div>
-            <LocationItem 
-                id={id}
-                latitude={props.target.data.latitude} 
-                longitude={props.target.data.longitude} 
-                name={props.target.data.name} 
-                inputStates={targetsCtx.targets[id].inputStates}
-                onAction={targetsCtx.action}
+            <Location 
+                type='target'
+                data={locationsCtx.targets[props.id]}
+                onAction={locationsCtx.updateInput}
             />
             <button onClick={removeTargetHandler}>Remove Target</button>
         </div>

@@ -2,22 +2,17 @@ import React, { useContext } from "react";
 
 import StartLocation from "./StartLocation";
 import TargetLocation from "./TargetLocation";
-import TargetsContext from "../store/target-context";
-import StartContext from "../store/start-context";
 import { Haversine } from "../utility";
+import LocationsContext from "../store/locations-context";
 
 const LocationsForm = (props) => {
     
     // States
-    const startCtx = useContext(StartContext);
-    const targetsCtx = useContext(TargetsContext);
+    const locationsCtx = useContext(LocationsContext)
     
-    // 
-
     // Handlers
     const resetFormHandler = () => {
-        startCtx.action({type:'RESET'});
-        targetsCtx.reset();
+        locationsCtx.reset();
         props.onSetResultDisplay(false);
     }
 
@@ -35,21 +30,24 @@ const LocationsForm = (props) => {
         }
 
         let targetDistances = [];
+        let results = [];
 
         // call haversine method to calculate distance from start to each target
-        Object.values(targetsCtx.targets).forEach((target)=>{
-            let d = Haversine(
-                {lat: startCtx.data.latitude, long: startCtx.data.longitude}, 
-                {lat: target.latitude, long: target.longitude}
-            );
-                
-            targetDistances.push({id: target.id, distance: d})
-        });
-  
-        const results = {
-            closest: FindClosestTarget(targetDistances),
-            furthest: FindFurthestTarget(targetDistances),
-        }
+        Object.values(locationsCtx.starts).forEach((start) =>{
+            Object.values(locationsCtx.targets).forEach((target)=>{
+                let d = Haversine(
+                    {lat: start.latitude, long: start.longitude}, 
+                    {lat: target.latitude, long: target.longitude}
+                );
+                    
+                targetDistances.push({startId: start.id, targetId: target.id, distance: d})
+            });
+            results.push({
+                closest: FindClosestTarget(targetDistances),
+                furthest: FindFurthestTarget(targetDistances),
+            })
+            targetDistances = [];
+        }); 
 
         // 
         props.onSetResults(results);
@@ -61,22 +59,29 @@ const LocationsForm = (props) => {
             <form onSubmit={submitHandler}>
                 <div className="">
                     <h2>Starting Location:</h2>
-                    <StartLocation />
+                    {Object.values(locationsCtx.starts).map((start) => {
+                        return(
+                            <StartLocation
+                                key={start.id}
+                                id={start.id}
+                            />
+                        )
+                    })}
                 </div>
 
                 <div className="">
                     <h2>Target Locations:</h2>
-                    {Object.values(targetsCtx.targets).map((target) => {
+                    {Object.values(locationsCtx.targets).map((target) => {
                         return(
                             <TargetLocation
-                                key={target.data.id} 
-                                target={target} 
+                                key={target.id} 
+                                id={target.id}
                             />)
                     })}
                 </div>
 
                 <div className="form-actions">
-                    <button type="button" onClick={targetsCtx.add}>Add New Destination</button>
+                    <button type="button" onClick={locationsCtx.addTarget}>Add New Destination</button>
                     <button type="button" onClick={resetFormHandler}>Reset Form</button>
                     <button type="submit">Submit Form</button>
                 </div>

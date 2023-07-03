@@ -1,55 +1,63 @@
 import React from "react";
 
-const LocationItem = (props) => {
+const Location = (props) => {
 
+    const{id, latitude, longitude, name} = props.data;
+    
     // Handlers
     const blurLatHandler = () => {
         props.onAction({
-            id: props.id, 
+            id: id,
             type: 'BLUR', 
             field: 'LAT',
+            locationType: props.type,
         })
     }
 
     const changeLatHandler = (event) => {
         props.onAction({
-            id: props.id, 
+            id: id, 
             type: 'INPUT', 
             field : 'LAT',
-            updatedValue: event.target.value,}
-        )
+            locationType: props.type,
+            updatedValue: event.target.value,
+        })
     }
 
     const blurLongHandler = () => {
         props.onAction({
-            id: props.id, 
+            id: id, 
             type: 'BLUR', 
             field: 'LONG',
+            locationType: props.type,
         })
     }
 
     const changeLongHandler = (event) => {
         props.onAction({
-            id: props.id, 
+            id: id, 
             type: 'INPUT', 
             field : 'LONG',
-            updatedValue: event.target.value,}
-        )
+            locationType: props.type,
+            updatedValue: event.target.value,
+        })
     }
 
     const blurNameHandler = () => {
         props.onAction({
-            id: props.id, 
+            id: id, 
             type: 'BLUR', 
             field: 'NAME',
+            locationType: props.type,
         })
     }
 
     const changeNameHandler = (event) => {  
         props.onAction({
-            id: props.id, 
+            id: id, 
             type: 'INPUT', 
             field : 'NAME',
+            locationType: props.type,
             updatedValue: event.target.value,}
         )
     }
@@ -57,48 +65,48 @@ const LocationItem = (props) => {
     return(
         <div className='control-group'>
             <div className='form-control'>
-                <label htmlFor={`latitude_${props.id}`}>Latitude</label>
+                <label htmlFor={`latitude_${id}`}>Latitude</label>
                 <input 
                     type="text" 
-                    name={`latitude_${props.id}`} 
-                    id={`latitude_${props.id}`} 
+                    name={`latitude_${id}`} 
+                    id={`latitude_${id}`} 
                     onChange={changeLatHandler}
                     onBlur={blurLatHandler}
-                    value={props.latitude} 
+                    value={latitude} 
                     placeholder="ex. 33.9425/N"
                 />
-                {props.inputStates.latInputHasError && <p className="error-text">Latitude Input Invalid</p>}
+                {props.data.latInputHasError && <p className="error-text">Latitude Input Invalid</p>}
             </div>
 
             <div className='form-control'>
-                <label htmlFor={`longitude_${props.id}`}>Longitude</label>
+                <label htmlFor={`longitude_${id}`}>Longitude</label>
                 <input 
                     type="text" 
-                    name={`longitude_${props.id}`} 
-                    id={`longitude_${props.id}`}
+                    name={`longitude_${id}`} 
+                    id={`longitude_${id}`}
                     onChange={changeLongHandler} 
                     onBlur={blurLongHandler}
-                    value={props.longitude} 
+                    value={longitude} 
                     placeholder="ex. 118.4081/W"
                 />
-                {props.inputStates.longInputHasError && <p className="error-text">Longitude Input Invalid</p>}
+                {props.data.longInputHasError && <p className="error-text">Longitude Input Invalid</p>}
             </div>
 
             <div className='form-control'>
-                <label htmlFor={`location_${props.id}`}>Location Name</label>
+                <label htmlFor={`location_${id}`}>Location Name</label>
                 <input 
                     type="text" 
-                    name={`location_${props.id}`} 
-                    id={`location_${props.id}`}
+                    name={`location_${id}`} 
+                    id={`location_${id}`}
                     onChange={changeNameHandler}
                     onBlur={blurNameHandler}
-                    value={props.name} 
+                    value={name} 
                     placeholder="ex. Los Angeles"
                 />      
-                {props.inputStates.nameInputHasError && <p className="error-text">Location Input Invalid</p>}
+                {props.data.nameInputHasError && <p className="error-text">Location Input Invalid</p>}
             </div>
         </div>
     ); 
 } 
 
-export default LocationItem;
+export default Location;
