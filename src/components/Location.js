@@ -1,5 +1,7 @@
 import React from "react";
 
+import classes from './Location.module.css'
+
 const Location = (props) => {
 
     const{id, latitude, longitude, name} = props.data;
@@ -63,8 +65,8 @@ const Location = (props) => {
     }
       
     return(
-        <div className='control-group'>
-            <div className='form-control'>
+        <div className={classes.control_group}>
+            <div className={classes.form_control}>
                 <label htmlFor={`latitude_${id}`}>Latitude</label>
                 <input 
                     type="text" 
@@ -75,10 +77,10 @@ const Location = (props) => {
                     value={latitude} 
                     placeholder="ex. 33.9425/N"
                 />
-                {props.data.latInputHasError && <p className="error-text">Latitude Input Invalid</p>}
+                {props.data.latInputHasError && <p className={classes.error_text}>Latitude Input Invalid</p>}
             </div>
 
-            <div className='form-control'>
+            <div className={classes.form_control}>
                 <label htmlFor={`longitude_${id}`}>Longitude</label>
                 <input 
                     type="text" 
@@ -89,10 +91,10 @@ const Location = (props) => {
                     value={longitude} 
                     placeholder="ex. 118.4081/W"
                 />
-                {props.data.longInputHasError && <p className="error-text">Longitude Input Invalid</p>}
+                {props.data.longInputHasError && <p className={classes.error_text}>Longitude Input Invalid</p>}
             </div>
 
-            <div className='form-control'>
+            <div className={classes.form_control}>
                 <label htmlFor={`location_${id}`}>Location Name</label>
                 <input 
                     type="text" 
@@ -102,8 +104,8 @@ const Location = (props) => {
                     onBlur={blurNameHandler}
                     value={name} 
                     placeholder="ex. Los Angeles"
-                />      
-                {props.data.nameInputHasError && <p className="error-text">Location Input Invalid</p>}
+                />
+                {props.data.nameInputHasError && <p className={classes.error_text}>Location Input Invalid</p>}
             </div>
         </div>
     ); 

@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-
 import LocationsForm from './components/LocationsForm';
 import Results from './components/Results';
 import LocationsProvider from './store/LocationsProvider';
+import Header from './components/Header';
 
 function App() {
   const [results, setResults] = useState([]);
@@ -10,28 +10,21 @@ function App() {
 
   return (
     <React.Fragment>
-      <div className='heading'>
-        <h1>Travel Distance Calculator</h1>
-      </div>
+      <Header/>
 
       <div className='body'>
-      <LocationsProvider>
-          <div className='form'>
-              <LocationsForm 
-                onSetResults={setResults} 
-                onSetResultDisplay={setIsResultDisplayed}
-              />
-          </div>
+        <LocationsProvider>
+            <LocationsForm 
+              onSetResults={setResults} 
+              onSetResultDisplay={setIsResultDisplayed}
+            />
 
-          <div className='results'>
             <Results 
               results={results} 
               isDisplayed={isResultDisplayed}
             />
-          </div>
-      </LocationsProvider>
+        </LocationsProvider>
       </div>
-
     </React.Fragment>
   );
 }

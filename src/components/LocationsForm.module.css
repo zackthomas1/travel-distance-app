@@ -1,0 +1,22 @@
+.form{
+    text-align: center;
+    max-width: 80rem;
+    width: 90%;
+    margin: auto;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+
+.starts{
+    margin: 0.25rem;
+}
+
+.targets{
+    margin: .25rem;
+    margin-bottom: 1.0rem;
+}
+
+.form_actions{
+    margin: .5rem;
+}
+

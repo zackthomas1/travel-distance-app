@@ -1,24 +1,33 @@
 import React, { useContext } from "react";
 
+import Card from "./UI/Card";
+import Button from "./UI/Button";
 import StartLocation from "./StartLocation";
 import TargetLocation from "./TargetLocation";
 import { Haversine } from "../utility";
 import LocationsContext from "../store/locations-context";
+
+import classes from './LocationsForm.module.css'
 
 const LocationsForm = (props) => {
     
     // States
     const locationsCtx = useContext(LocationsContext)
     
+    const targetsCount = Object.values(locationsCtx.targets).length 
+    
+    // Set form validity
+    let formIsValid = targetsCount > 0;
+    if(formIsValid){
+        formIsValid = !(Object.values(locationsCtx.starts).some((start) => !start.isInputValid ));
+        formIsValid = !(Object.values(locationsCtx.targets).some((target) => !target.isInputValid))  
+    }
+   
     // Handlers
     const resetFormHandler = () => {
         locationsCtx.reset();
         props.onSetResultDisplay(false);
     }
-
-    // Set form validity
-    let formIsValid = !(Object.values(locationsCtx.starts).some((start) => !start.isInputValid ));
-    formIsValid = !(Object.values(locationsCtx.targets).some((target) => !target.isInputValid))
 
     const submitHandler = (event) =>{
         event.preventDefault();
@@ -53,22 +62,22 @@ const LocationsForm = (props) => {
     }
 
     return(
-        <React.Fragment>
+        <Card className={classes.form}>
             <form onSubmit={submitHandler}>
-                <div className="">
-                    <h2>Starting Location:</h2>
-                    {Object.values(locationsCtx.starts).map((start) => {
-                        return(
-                            <StartLocation
-                                key={start.id}
-                                id={start.id}
-                            />
-                        )
-                    })}
+                <div className={classes.starts}>
+                    <h2>Starting Location</h2>
+                        {Object.values(locationsCtx.starts).map((start) => {
+                            return(
+                                <StartLocation
+                                    key={start.id}
+                                    id={start.id}
+                                />
+                            )
+                        })}
                 </div>
 
-                <div className="">
-                    <h2>Target Locations:</h2>
+                <div className={classes.targets}>
+                    <h2>Target Locations</h2>
                     {Object.values(locationsCtx.targets).map((target) => {
                         return(
                             <TargetLocation
@@ -76,15 +85,16 @@ const LocationsForm = (props) => {
                                 id={target.id}
                             />)
                     })}
+                    {(targetsCount < 1) && <p>Must have at least one target</p>}
                 </div>
 
-                <div className="form-actions">
-                    <button type="button" onClick={locationsCtx.addTarget}>Add New Destination</button>
-                    <button type="button" onClick={resetFormHandler}>Reset Form</button>
-                    <button type="submit" disabled={!formIsValid}>Submit Form</button>
+                <div className={classes.form_actions}>
+                    <Button type="button" onClick={locationsCtx.addTarget}>Add New Destination</Button>
+                    <Button type="button" onClick={resetFormHandler}>Reset Form</Button>
+                    <Button type="submit" disabled={!formIsValid}>Submit Form</Button>
                 </div>
             </form>
-        </React.Fragment>
+        </Card>
 
     );
 }
