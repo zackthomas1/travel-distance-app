@@ -47,7 +47,16 @@ const LocationsForm = (props) => {
                     {lat: target.latitude, long: target.longitude}
                 );
                     
-                targetDistances.push({startId: start.id, targetId: target.id, distance: d})
+                targetDistances.push({
+                    id: start.id,
+                    startLat: start.latitude, 
+                    startLong: start.longitude,
+                    startName: start.name, 
+                    targetLat: target.latitude, 
+                    targetLong: target.longitude,
+                    targetName: target.name,
+                    distance: d,
+                });
             });
             results.push({
                 closest: FindClosestTarget(targetDistances),

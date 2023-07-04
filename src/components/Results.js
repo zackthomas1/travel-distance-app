@@ -1,28 +1,42 @@
-import React, { useContext } from "react"
+import React from "react"
 import Card from "./UI/Card";
-import LocationsContext from "../store/locations-context";
 
 import classes from './Results.module.css'
 
 const Results = (props) => {
     //
-    const locationsCtx = useContext(LocationsContext);
     const isResultsEmpty = !(props.results.length > 0);
 
     const content_element = props.results.map((result) => {
-        const { startId:closestStartId, targetId: closestTargetId, distance: closestDistance } = result.closest;
-        const {                         targetId: furthestTargetId, distance: furthestDistance } = result.furthest;
+        const {
+            id,
+            startLat,
+            startLong,
+            startName,
+            targetLat: closestTargetLat, 
+            targetLong: closestTargetLong,
+            targetName: closestTargetName,
+            distance: closestDistance,
+        } = result.closest;
+        const {
+
+
+            targetLat: furthestTargetLat, 
+            targetLong: furthestTargetLong,
+            targetName: furthestTargetName,
+            distance: furthestDistance,
+        } = result.furthest;
     
         return(
-            <div key={closestStartId}>
+            <div key={id}>
                 <p>
-                    {`Start Location: ${locationsCtx.starts[closestStartId].latitude} ${locationsCtx.starts[closestStartId].longitude} (${locationsCtx.starts[closestStartId].name})`}
+                    {`Start Location: ${startLat} ${startLong} (${startName})`}
                 </p>
                 <p>
-                    {`Closet Location: ${locationsCtx.targets[closestTargetId].latitude} ${locationsCtx.targets[closestTargetId].longitude} (${locationsCtx.targets[closestTargetId].name}) (${closestDistance.toFixed(2)} miles)`}
+                    {`Closet Location: ${closestTargetLat} ${closestTargetLong} (${closestTargetName}) (${closestDistance.toFixed(2)} miles)`}
                 </p>
                 <p>
-                    {`Farthest Location: ${locationsCtx.targets[furthestTargetId].latitude} ${locationsCtx.targets[furthestTargetId].longitude} (${locationsCtx.targets[furthestTargetId].name}) (${furthestDistance.toFixed(2)} miles)`}
+                    {`Farthest Location: ${furthestTargetLat} ${furthestTargetLong} (${furthestTargetName}) (${furthestDistance.toFixed(2)} miles)`}
                 </p>                
             </div>
         );
