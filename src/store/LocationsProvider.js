@@ -222,7 +222,7 @@ const locationsStateReducer = (state, action) => {
 
 const validateLatLongValue = (input) => {
     // ex. '188.35/S'
-    const pattern = /^\d+(\.\d+)?\/[A-Z]$/
+    const pattern = /^\d+(\.\d+)?\/[A-Za-z]$/
     const regex = new RegExp(pattern);
 
     // ex. '-188.35
