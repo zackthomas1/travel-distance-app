@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 
 import Card from "./UI/Card";
 import Button from "./UI/Button";
@@ -13,15 +13,13 @@ const LocationsForm = (props) => {
     
     // States
     const locationsCtx = useContext(LocationsContext)
-    
+
     const targetsCount = Object.values(locationsCtx.targets).length 
-    
+
     // Set form validity
-    let formIsValid = targetsCount > 0;
-    if(formIsValid){
-        formIsValid = !(Object.values(locationsCtx.starts).some((start) => !start.isInputValid ));
-        formIsValid = !(Object.values(locationsCtx.targets).some((target) => !target.isInputValid))  
-    }
+    let formIsValid = targetsCount > 0 &&
+        !(Object.values(locationsCtx.starts).some((start) => !start.isInputValid )) &&
+        !(Object.values(locationsCtx.targets).some((target) => !target.isInputValid));
    
     // Handlers
     const resetFormHandler = () => {

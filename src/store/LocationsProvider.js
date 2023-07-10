@@ -143,6 +143,8 @@ const locationsStateReducer = (state, action) => {
                     !updatedState[locationType][action.payload.id].nameInputHasError) 
                 {
                     updatedState[locationType][action.payload.id].isInputValid = true
+                }else{
+                    updatedState[locationType][action.payload.id].isInputValid = false
                 }
     
                 return updatedState;
@@ -158,6 +160,8 @@ const locationsStateReducer = (state, action) => {
                     !updatedState[locationType][action.payload.id].nameInputHasError) 
                 {
                     updatedState[locationType][action.payload.id].isInputValid = true
+                }else{
+                    updatedState[locationType][action.payload.id].isInputValid = false
                 }
 
                 return updatedState;
@@ -173,6 +177,8 @@ const locationsStateReducer = (state, action) => {
                     !updatedState[locationType][action.payload.id].longInputHasError) 
                 {
                     updatedState[locationType][action.payload.id].isInputValid = true
+                }else{
+                    updatedState[locationType][action.payload.id].isInputValid = false
                 }
 
                 return updatedState;
