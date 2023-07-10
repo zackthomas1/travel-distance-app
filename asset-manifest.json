@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/travel-distance-app/static/css/main.ef5ad11c.css",
-    "main.js": "/travel-distance-app/static/js/main.64d52f09.js",
+    "main.js": "/travel-distance-app/static/js/main.20048752.js",
     "index.html": "/travel-distance-app/index.html",
     "main.ef5ad11c.css.map": "/travel-distance-app/static/css/main.ef5ad11c.css.map",
-    "main.64d52f09.js.map": "/travel-distance-app/static/js/main.64d52f09.js.map"
+    "main.20048752.js.map": "/travel-distance-app/static/js/main.20048752.js.map"
   },
   "entrypoints": [
     "static/css/main.ef5ad11c.css",
-    "static/js/main.64d52f09.js"
+    "static/js/main.20048752.js"
   ]
 }
