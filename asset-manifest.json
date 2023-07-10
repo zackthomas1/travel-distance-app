@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/travel-distance-app/static/css/main.ef5ad11c.css",
+    "main.js": "/travel-distance-app/static/js/main.64d52f09.js",
+    "index.html": "/travel-distance-app/index.html",
+    "main.ef5ad11c.css.map": "/travel-distance-app/static/css/main.ef5ad11c.css.map",
+    "main.64d52f09.js.map": "/travel-distance-app/static/js/main.64d52f09.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ef5ad11c.css",
+    "static/js/main.64d52f09.js"
+  ]
+}
