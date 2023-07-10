@@ -19,8 +19,6 @@ const Results = (props) => {
             distance: closestDistance,
         } = result.closest;
         const {
-
-
             targetLat: furthestTargetLat, 
             targetLong: furthestTargetLong,
             targetName: furthestTargetName,

@@ -98,7 +98,7 @@ const LocationsForm = (props) => {
                 </div>
 
                 <div className={classes.form_actions}>
-                    <Button type="button" onClick={locationsCtx.addTarget}>Add New Destination</Button>
+                    <Button type="button" onClick={locationsCtx.addTarget}>Add New Target</Button>
                     <Button type="button" onClick={resetFormHandler}>Reset Form</Button>
                     <Button type="submit" disabled={!formIsValid}>Submit Form</Button>
                 </div>
